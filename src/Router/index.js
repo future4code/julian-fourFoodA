@@ -9,6 +9,7 @@ import CartPage from '../Pages/CartPage';
 import ProfilePage from '../Pages/ProfilePage';
 import UpdateProfilePage from '../Pages/UpdateProfilePage';
 import UpdateAddressPage from '../Pages/UpdateAddressPage';
+import SearchPage from '../Pages/SearchPage';
 
 const Router = () => {
   return (
@@ -40,6 +41,9 @@ const Router = () => {
         </Route>
         <Route exact path='/profile/:profileId/updateAddress'>
           <UpdateAddressPage />
+        </Route>
+        <Route exact path='/search'>
+          <SearchPage />
         </Route>
       </Switch>
     </BrowserRouter>
