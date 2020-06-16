@@ -4,15 +4,13 @@ import { FooterContainer, CartStlIcon, HomeStlIcon, ProfileStlIcon, BarButton } 
 
 const Footer = () => {
 
-  const [ profileId, setProfileId] = useState('bananinha');
-
   const history = useHistory();
 
   return (
     <FooterContainer>
       <BarButton onClick={() => history.push('/home')} size='big'><HomeStlIcon/></BarButton>
       <BarButton onClick={() => history.push('/cart')} size='big'><CartStlIcon/></BarButton>
-      <BarButton onClick={() => history.push(`/profile/:profileId`)} size='big'><ProfileStlIcon/></BarButton>
+      <BarButton onClick={() => history.push(`/profile`)} size='big'><ProfileStlIcon/></BarButton>
     </FooterContainer>
   );
 };
