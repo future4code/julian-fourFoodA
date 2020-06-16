@@ -28,9 +28,7 @@ const LoginPage = () => {
   
   return (
     <LoginPageContainer>
-      <Header />
       LoginPage
-      <Footer />
     </LoginPageContainer>
   )
 }
