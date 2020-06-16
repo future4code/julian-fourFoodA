@@ -33,6 +33,10 @@ const LoginPage = () => {
     history.push('/home');
   };
 
+  const goToAddAdress = () => {
+    history.push('/addaddress');
+  };
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -40,8 +44,17 @@ const LoginPage = () => {
   };
 
   const handleToLogin = () => {
-    login(form);
-    resetForm();
+    if (emailValidation(form.email)) {
+      login(form);
+      resetForm();
+    } else {
+      alert('Formato de e-mail inválido!');
+    };
+  };
+
+  const emailValidation = (email) => {
+    const rgx = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$/;
+    return rgx.test(String(email).toLowerCase());
   };
 
   const login = async (body) => {
@@ -49,7 +62,7 @@ const LoginPage = () => {
       const response = await axios.post(`${baseUrl}/login`, body);
       console.log(response.data.token);
       localStorage.setItem('token', response.data.token);
-      goToHome();
+      response.data.user.hasAddress ? goToHome() : goToAddAdress();
     } catch (error) {
       console.error(error);
     }
@@ -80,9 +93,10 @@ const LoginPage = () => {
           id="outlined-password-input"
           label="Senha"
           type="password"
-          autoComplete="current-password"
           variant="outlined"
           placeholder="Mínimo 6 caracteres"
+          inputProps={{ minLength: 6 }}
+          inputProps={{ maxLength: 20 }}
           onChange={handleInputChange}
         />
         <EnterButton 
