@@ -33,13 +33,13 @@ const Router = () => {
         <Route exact path='/cart'>
           <CartPage />
         </Route>
-        <Route exact path='/profile/profileId'>
+        <Route exact path='/profile'>
           <ProfilePage />
         </Route>
         <Route exact path='/profile/updateProfile'>
           <UpdateProfilePage />
         </Route>
-        <Route exact path='/profile/:profileId/updateAddress'>
+        <Route exact path='/profile/updateAddress'>
           <UpdateAddressPage />
         </Route>
         <Route exact path='/search'>

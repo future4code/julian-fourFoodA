@@ -15,7 +15,7 @@ const Header = () => {
       case "/cart":
         setCurrentPage("Meu carrinho");
         break;
-      case "/profile/:profileId":
+      case "/profile":
         setCurrentPage("Meu perfil");
         break;
       case "/restaurant/:restaurantId":
@@ -25,8 +25,8 @@ const Header = () => {
       case "/profile/updateProfile":
         setCurrentPage("Editar");
         setHasBackButton(true);
-        break;    
-      case "/profile/:profileId/updateAddress":
+        break;
+      case "/profile/updateAddress":
         setCurrentPage("Endereço");
         setHasBackButton(true);
         break;
@@ -34,7 +34,6 @@ const Header = () => {
         setCurrentPage("Buscar");
         setHasBackButton(true);
         break;
-      case "/":
       case "/signup":
       case "/addaddress":
         setCurrentPage(" ");

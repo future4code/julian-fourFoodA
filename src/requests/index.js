@@ -21,6 +21,7 @@ export const login = async (body) => {
 export const signUp = async (body) => {
   try {
     const response = await axios.post(`${baseUrl}/signup`, body);
+    alert("Usuário cadastrado com sucesso!")
     return response.data;
   } catch (error) {
     return error.response;
