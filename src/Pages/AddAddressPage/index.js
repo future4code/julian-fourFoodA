@@ -1,13 +1,18 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import {
-  AddAddressPageContainer
+  FormContainer
 } from './style';
-import {} from '../../styles';
+import {
+  PageContainer,
+  FormFormControl,
+  FormTextField,
+  FormButton
+} from '../../styles';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import useForm from '../../hooks/useForm';
-import {} from '../../requests';
+import { addAddress } from '../../requests';
 
 const AddAddressPage = () => {
 
@@ -29,13 +34,102 @@ const AddAddressPage = () => {
   }
 
   const history = useHistory();
+
+  const goToAddAddress = (event) => {
+    event.preventDefault();
+    const response = addAddress(form);
+    if (response.user.hasAddress) {
+      window.localStorage.setItem('token', response.token);
+      history.push('/home');
+    }
+  }
   
   return (
-    <AddAddressPageContainer>
+    <PageContainer>
       <Header />
-      AddAddressPage
+      <FormContainer onSubmit={goToAddAddress} >
+        <p>Meu endereço</p>
+        <FormFormControl>
+          <FormTextField 
+            name='street'
+            value={street}
+            label='Logradouro'
+            placeholder='Rua / Av.'
+            type='text'
+            onChange={handleInputChange}
+            variant='outlined'
+            required
+          />
+        </FormFormControl>
+        <FormFormControl>
+          <FormTextField 
+            name='number'
+            value={number}
+            label='Número'
+            placeholder='Número'
+            type='number'
+            onChange={handleInputChange}
+            variant='outlined'
+            required
+          />
+        </FormFormControl>
+        <FormFormControl>
+          <FormTextField 
+            name='complement'
+            value={complement}
+            label='Complemento'
+            placeholder='Apto / Bloco'
+            type='text'
+            onChange={handleInputChange}
+            variant='outlined'
+          />
+        </FormFormControl>
+        <FormFormControl>
+          <FormTextField 
+            name='neighbourhood'
+            value={neighbourhood}
+            label='Bairro'
+            placeholder='Bairro'
+            type='text'
+            onChange={handleInputChange}
+            variant='outlined'
+            required
+          />
+        </FormFormControl>
+        <FormFormControl>
+          <FormTextField 
+            name='city'
+            value={city}
+            label='Cidade'
+            placeholder='Cidade'
+            type='text'
+            onChange={handleInputChange}
+            variant='outlined'
+            required
+          />
+        </FormFormControl>
+        <FormFormControl>
+          <FormTextField 
+            name='state'
+            value={state}
+            label='Estado'
+            placeholder='Estado'
+            type='Estado'
+            onChange={handleInputChange}
+            variant='outlined'
+            required
+          />
+        </FormFormControl>
+        <FormButton 
+          type='submit' 
+          variant='contained'
+          color='primary' 
+        >
+          Salvar
+        </FormButton>
+      </FormContainer>
       <Footer />
-    </AddAddressPageContainer>
+    </PageContainer>
   )
 }
 

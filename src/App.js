@@ -1,11 +1,13 @@
 import React from 'react';
 import Router from './Router';
+import { MyTheme } from './themes';
+import { MuiThemeProvider } from "@material-ui/core";
 
 const App = () => {
   return (
-    <div>
+    <MuiThemeProvider theme={MyTheme}>
       <Router />
-    </div>
+    </MuiThemeProvider>
   );
 }
 
