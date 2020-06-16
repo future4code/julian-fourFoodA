@@ -11,8 +11,6 @@ import {
   Entrar
 } from './style';
 import {} from '../../styles';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import useForm from '../../hooks/useForm';
 import {} from '../../requests';
 import futureFoodLogo from '../../img/logo-future-eats-invert.png'
@@ -87,7 +85,11 @@ const LoginPage = () => {
           placeholder="Mínimo 6 caracteres"
           onChange={handleInputChange}
         />
-        <EnterButton onClick={handleToLogin} variant="contained">
+        <EnterButton 
+          onClick={handleToLogin} 
+          variant="contained"
+          color="primary"  
+        >
         Entrar
       </EnterButton>
       </LoginForm>

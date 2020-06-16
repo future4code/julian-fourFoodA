@@ -29,7 +29,6 @@ const Header = () => {
       case "/profile/updateAddress":
         setCurrentPage("Endereço");
         setHasBackButton(true);
-
         break;
       case "/search":
         setCurrentPage("Buscar");
