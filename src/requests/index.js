@@ -4,14 +4,19 @@ const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/fourFoodA'
 
 const token = window.localStorage.getItem('token');
 
+/**
 export const login = async (body) => {
   try {
     const response = await axios.post(`${baseUrl}/login`, body);
+    localStorage.setItem('token', response.data.token);
+    alert('blau')
     return response.data;
   } catch (error) {
+    alert('bleu')
     return error.response;
   }
 }
+*/
 
 export const signUp = async (body) => {
   try {
