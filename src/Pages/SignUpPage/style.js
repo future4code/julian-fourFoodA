@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-
 
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 
@@ -29,10 +26,4 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-`
-export const Input = styled(TextField)`
-  
-`
-export const SendButton = styled(Button)`
-  width: 14rem;
 `
