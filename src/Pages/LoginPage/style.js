@@ -14,7 +14,7 @@ export const LoginPageContainer = styled.div`
 `
 
 export const LogoImage = styled.div`
-margin-bottom: 28px;
+  margin-bottom: 28px;
 `
 
 export const LoginForm = styled.form`
