@@ -5,6 +5,9 @@ export const MyTheme = createMuiTheme({
     primary: {
       main: "#e8222e",
       contrastText: '#000'
+    },
+    secondary: {
+      main: '#000'
     }
   }
 });

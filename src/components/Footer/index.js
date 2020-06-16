@@ -8,9 +8,9 @@ const Footer = () => {
 
   return (
     <FooterContainer>
-      <BarButton onClick={() => history.push('/home')} size='big'><HomeStlIcon/></BarButton>
-      <BarButton onClick={() => history.push('/cart')} size='big'><CartStlIcon/></BarButton>
-      <BarButton onClick={() => history.push(`/profile`)} size='big'><ProfileStlIcon/></BarButton>
+      <BarButton onClick={() => history.push('/home')} size='large'><HomeStlIcon/></BarButton>
+      <BarButton onClick={() => history.push('/cart')} size='large'><CartStlIcon/></BarButton>
+      <BarButton onClick={() => history.push(`/profile`)} size='large'><ProfileStlIcon/></BarButton>
     </FooterContainer>
   );
 };
