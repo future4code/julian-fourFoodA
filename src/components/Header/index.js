@@ -22,14 +22,13 @@ const Header = () => {
         setCurrentPage("Restaurante");
         setHasBackButton(true);
         break;
-      case "/profile/:profileId/updateProfile":
+      case "/profile/updateProfile":
         setCurrentPage("Editar");
         setHasBackButton(true);
-        break;
+        break;    
       case "/profile/:profileId/updateAddress":
         setCurrentPage("Endereço");
         setHasBackButton(true);
-
         break;
       case "/search":
         setCurrentPage("Buscar");

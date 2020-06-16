@@ -66,7 +66,7 @@ export const getProfile = async () => {
   }
 }
 
-export const updateProfile = async (body) => {
+/**export const updateProfile = async (body) => {
   try {
     const response = await axios.put(`${baseUrl}/profile`, body, {
       headers: {
@@ -78,6 +78,8 @@ export const updateProfile = async (body) => {
     return error.response;
   }
 }
+*/
+
 
 export const getRestaurants = async () => {
   try {

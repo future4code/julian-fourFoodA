@@ -26,6 +26,7 @@ export const LoginForm = styled.form`
 `
 
 export const EmailInput = styled(TextField)`
+  height: 56px;
   width: 100%;
   &&{
     margin-top: 8px;
@@ -34,6 +35,7 @@ export const EmailInput = styled(TextField)`
 `
 
 export const PasswordInput = styled(TextField)`
+  height: 56px;
   width: 100%;
   &&{
     margin-top: 8px;
@@ -45,7 +47,6 @@ export const EnterButton = styled(Button)`
   height: 42px;
   width: 100%;
   &&{
-    background-color: #e8222e;
     margin-top: 8px;
     margin-bottom:28px;
   }
