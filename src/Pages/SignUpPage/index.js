@@ -1,39 +1,25 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import {
-  SignUpPageContainer
+  SignUpPageContainer,
+  TopBar,
+  ArrowBack,
+  MainContainer
 } from './style';
-import {} from '../../styles';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import useForm from '../../hooks/useForm';
-import {} from '../../requests';
+import FormSignup from './FormSignUp';
+
 
 const SignUpPage = () => {
-
-  const { form, onChange, resetForm } = useForm({
-    name: '',
-    email: '',
-    cpf: '',
-    password: '',
-    confirmPassword: ''
-  });
-
-  const { name, email, cpf, password, confirmPassword } = form;
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    onChange(name, value);
-  }
-
-  const history = useHistory();
-  
+    
   return (
     <SignUpPageContainer>
-      <Header />
-      SignUpPage
-      <Footer />
+      <TopBar>
+        <ArrowBack />
+      </TopBar>
+      <MainContainer>
+        <img src="https://cdn.zeplin.io/5dd5ab8e5fb2a0060f81698f/assets/2420CEFD-BBDE-49C8-91E3-A49B116851E9.svg" alt="Logo Ifuture" />
+        <p>Cadastrar</p>
+        <FormSignup />
+      </MainContainer>   
     </SignUpPageContainer>
   )
 }

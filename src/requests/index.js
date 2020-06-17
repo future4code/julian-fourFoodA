@@ -5,18 +5,25 @@ const baseUrl =
 
 const token = window.localStorage.getItem("token");
 
+/**
 export const login = async (body) => {
   try {
     const response = await axios.post(`${baseUrl}/login`, body);
+    localStorage.setItem('token', response.data.token);
+    alert('blau')
     return response.data;
   } catch (error) {
+    alert('bleu')
     return error.response;
   }
-};
+}
+*/
+
 
 export const signUp = async (body) => {
   try {
     const response = await axios.post(`${baseUrl}/signup`, body);
+    alert("Usuário cadastrado com sucesso!")
     return response.data;
   } catch (error) {
     return error.response;
@@ -62,7 +69,7 @@ export const getProfile = async () => {
   }
 };
 
-export const updateProfile = async (body) => {
+/**export const updateProfile = async (body) => {
   try {
     const response = await axios.put(`${baseUrl}/profile`, body, {
       headers: {
@@ -73,7 +80,8 @@ export const updateProfile = async (body) => {
   } catch (error) {
     return error.response;
   }
-};
+}
+*/
 
 export const getRestaurants = async () => {
   try {
