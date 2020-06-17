@@ -16,13 +16,13 @@ import {
   SelectModal,
   BotaoModal,
 } from "./style";
-
+import { useHistory } from 'react-router'
 import usePrivatePage from "../../hooks/usePrivatePage";
 import { getRestaurantDetail } from "../../requests";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import IconButton from "@material-ui/core/IconButton";
 import { useForm } from "../../hooks/useForm";
-
+import Header from '../../components/Header'
 import CardMedia from "@material-ui/core/CardMedia";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -35,17 +35,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RestaurantPage = () => {
+const RestaurantPage = ({ match }) => {
   // usePrivatePage();
   const classes = useStyles();
   const [listaRestaurante, setListaRestaurante] = useState([]);
   const [listaProdutos, setListaProdutos] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-
   const { form, onChange, resetForm } = useForm({
     quantidadeproduto: "",
   });
-
+  const restaurantId = match.params.restaurantId;
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
@@ -59,10 +58,7 @@ const RestaurantPage = () => {
   };
 
   const carregaDetalhes = () => {
-    const body = {
-      id: 9,
-    };
-    getRestaurantDetail(body)
+    getRestaurantDetail(restaurantId)
       .then((response) => {
         console.log("Peguei detalhes", response);
         setListaRestaurante(response.restaurant);
@@ -93,14 +89,7 @@ const RestaurantPage = () => {
 
   return (
     <RestaurantPageContainer>
-      <RestaurantTopContainer>
-        <ContainerBotao>
-          <IconButton>
-            <ArrowBackIosIcon></ArrowBackIosIcon>
-          </IconButton>
-        </ContainerBotao>
-        <span>Restaurante</span>
-      </RestaurantTopContainer>
+      <Header/>
 
       <CardRestaurante className={classes.root}>
         <CardMedia

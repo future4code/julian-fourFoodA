@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { TabUncap, HomePageContainer, AppBarClean, SearchField, SearchContainer } from "./style";
+import { TabUncap, HomePageContainer, AppBarClean, SearchField, SearchContainer, BottomMargin } from "./style";
 import {} from "../../styles";
 import CardContainer from "./components/CardContainer";
 import Header from "../../components/Header";
@@ -117,6 +117,7 @@ const HomePage = () => {
       ) : (
         <p></p>
       )}
+      <BottomMargin/>
       <Footer />
     </HomePageContainer>
   );

@@ -19,6 +19,7 @@ export const ContainerBotao = styled.div`
 
 export const CardRestaurante = styled(Card)`
   margin: 17px auto;
+  box-shadow: none;
 `;
 
 export const ContainerPrincipais = styled.p`
@@ -29,11 +30,13 @@ export const ContainerPrincipais = styled.p`
 
 export const CardProduto = styled.div`
   display: flex;
-  border: 1px solid gray;
+  border: 1px solid #b8b8b8;
   width: 328px;
   height: 112px;
   margin: 8px 0 0 23px;
-  border-radius: 10px;
+  border-radius: 8px;
+  position: relative;
+  padding: 0;
 `;
 
 export const CardDescricaoProduto = styled.div`
@@ -61,12 +64,17 @@ export const ImgProduto = styled.img`
 export const BotaoAdicionar = styled.button`
   width: 90px;
   height: 31px;
+  position: absolute;
   justify-self: end;
   align-self: flex-end;
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  border: 1px solid black;
+  border-top-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   grid-column-start: 2;
   grid-row-start: 3;
+  background-color: #fff;
+  bottom: 0;
+  right: 0;
 `;
 
 export const TopDescricao = styled.div`
