@@ -15,22 +15,22 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/'>
+        <Route exact path="/">
           <LoginPage />
         </Route>
-        <Route exact path='/signup'>
+        <Route exact path="/signup">
           <SignUpPage />
         </Route>
-        <Route exact path='/addaddress'>
+        <Route exact path="/addaddress">
           <AddAddressPage />
         </Route>
-        <Route exact path='/home'>
+        <Route exact path="/home">
           <HomePage />
         </Route>
-        <Route exact path='/restaurant/:restaurantId'>
+        <Route exact path="/restaurant/:restaurantId">
           <RestaurantPage />
         </Route>
-        <Route exact path='/cart'>
+        <Route exact path="/cart">
           <CartPage />
         </Route>
         <Route exact path='/profile'>
@@ -47,7 +47,7 @@ const Router = () => {
         </Route>
       </Switch>
     </BrowserRouter>
-  )
-}
+  );
+};
 
 export default Router;

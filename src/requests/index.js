@@ -1,8 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
 
-const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/fourFoodA';
+const baseUrl =
+  "https://us-central1-missao-newton.cloudfunctions.net/fourFoodA";
 
-const token = window.localStorage.getItem('token');
+const token = window.localStorage.getItem("token");
 
 /**
 export const login = async (body) => {
@@ -13,7 +14,9 @@ export const login = async (body) => {
 }
 */
 
+
 export const signUp = async (body) => {
+
   const response = await axios.post(`${baseUrl}/signup`, body);
   alert("Usuário cadastrado com sucesso!")
   return response.data;
@@ -56,8 +59,8 @@ export const getProfile = async () => {
 }
 */
 
-
 export const getRestaurants = async () => {
+
   const response = await axios.get(`${baseUrl}/restaurants`, {
     headers: {
       auth: token
@@ -101,3 +104,4 @@ export const getOrdersHistory = async () => {
   });
   return response.data;
 }
+
