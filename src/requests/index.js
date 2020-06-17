@@ -24,6 +24,7 @@ export const signUp = async (body) => {
     alert("Usuário cadastrado com sucesso!")
     return response.data;
   } catch (error) {
+    alert("Algo deu errado, tente novamente.")
     return error.response;
   }
 }
@@ -35,9 +36,12 @@ export const addAddress = async (body) => {
         auth: token
       }
     });
+    alert("Endereço cadastrado com sucesso")
     return response.data;
   } catch (error) {
+    alert("Tente novamente")
     return error.response;
+    
   }
 }
 
@@ -61,7 +65,7 @@ export const getProfile = async () => {
         auth: token
       }
     });
-    return response.data;
+    return response.data.user;
   } catch (error) {
     return error.response;
   }

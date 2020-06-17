@@ -16,7 +16,7 @@ import { addAddress } from '../../requests';
 
 const AddAddressPage = () => {
 
-  const { form, onChange, resetForm } = useForm({
+  const { form, onChange } = useForm({
     street: '',
     number: '',
     complement:'',
@@ -35,9 +35,9 @@ const AddAddressPage = () => {
 
   const history = useHistory();
 
-  const goToAddAddress = (event) => {
+  const goToAddAddress = async (event) => {
     event.preventDefault();
-    const response = addAddress(form);
+    const response = await addAddress(form);
     if (response.user.hasAddress) {
       window.localStorage.setItem('token', response.token);
       history.push('/home');

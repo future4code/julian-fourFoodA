@@ -8,7 +8,7 @@ import {
 
 const ShowAddress = (props) => {
 
-  const history = useHistory;
+  const history = useHistory();
 
   const goToUpdateAddress = () => {
     history.push('/profile/updateAddress')
