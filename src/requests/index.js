@@ -6,143 +6,98 @@ const token = window.localStorage.getItem('token');
 
 /**
 export const login = async (body) => {
-  try {
-    const response = await axios.post(`${baseUrl}/login`, body);
-    localStorage.setItem('token', response.data.token);
-    alert('blau')
-    return response.data;
-  } catch (error) {
-    alert('bleu')
-    return error.response;
-  }
+  const response = await axios.post(`${baseUrl}/login`, body);
+  localStorage.setItem('token', response.data.token);
+  alert('blau')
+  return response.data;
 }
 */
 
 export const signUp = async (body) => {
-  try {
-    const response = await axios.post(`${baseUrl}/signup`, body);
-    alert("Usuário cadastrado com sucesso!")
-    return response.data;
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.post(`${baseUrl}/signup`, body);
+  alert("Usuário cadastrado com sucesso!")
+  return response.data;
 }
 
 export const addAddress = async (body) => {
-  try {
-    const response = await axios.put(`${baseUrl}/address`, body, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data;
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.put(`${baseUrl}/address`, body, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data;
 }
 
 export const getFullAddress = async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/profile/address`, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data;
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.get(`${baseUrl}/profile/address`, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data;
 }
 
 export const getProfile = async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/profile`, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data;
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.get(`${baseUrl}/profile`, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data;
 }
 
 /**export const updateProfile = async (body) => {
-  try {
-    const response = await axios.put(`${baseUrl}/profile`, body, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.put(`${baseUrl}/profile`, body, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data
 }
 */
 
 
 export const getRestaurants = async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/restaurants`, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.get(`${baseUrl}/restaurants`, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data
 }
 
 export const getRestaurantDetail = async (restaurantId) => {
-  try {
-    const response = await axios.get(`${baseUrl}/restaurants/${restaurantId}`, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data;
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.get(`${baseUrl}/restaurants/${restaurantId}`, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data;
 }
 
 export const placeOrder = async (body, restaurantId) => {
-  try {
-    const response = await axios.post(`${baseUrl}/restaurants/${restaurantId}/order`, body, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data;
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.post(`${baseUrl}/restaurants/${restaurantId}/order`, body, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data;
 }
 
 export const getActiveOrder = async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/active-order`, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data;
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.get(`${baseUrl}/active-order`, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data;
 }
 
 export const getOrdersHistory = async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/orders/history`, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data;
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.get(`${baseUrl}/orders/history`, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data;
 }
