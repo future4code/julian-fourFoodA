@@ -10,12 +10,13 @@ import ProfilePage from '../Pages/ProfilePage';
 import UpdateProfilePage from '../Pages/UpdateProfilePage';
 import UpdateAddressPage from '../Pages/UpdateAddressPage';
 import SearchPage from '../Pages/SearchPage';
+import OpeningPage from '../Pages/OpeningPage';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/">
+        <Route exact path="/login">
           <LoginPage />
         </Route>
         <Route exact path="/signup">
@@ -44,6 +45,9 @@ const Router = () => {
         </Route>
         <Route exact path='/search'>
           <SearchPage />
+        </Route>
+        <Route exact path='/'>
+          <OpeningPage />
         </Route>
       </Switch>
     </BrowserRouter>
