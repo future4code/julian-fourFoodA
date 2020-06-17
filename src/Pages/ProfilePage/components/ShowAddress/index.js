@@ -11,7 +11,7 @@ const ShowAddress = (props) => {
   const history = useHistory;
 
   const goToUpdateAddress = () => {
-    history.push('/profile/updateAddress')
+    history.push('/profile/updateaddress')
   }
 
   return (

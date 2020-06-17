@@ -36,10 +36,10 @@ const Router = () => {
         <Route exact path='/profile'>
           <ProfilePage />
         </Route>
-        <Route exact path='/profile/updateProfile'>
+        <Route exact path='/profile/updateprofile'>
           <UpdateProfilePage />
         </Route>
-        <Route exact path='/profile/updateAddress'>
+        <Route exact path='/profile/updateaddress'>
           <UpdateAddressPage />
         </Route>
         <Route exact path='/search'>

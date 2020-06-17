@@ -13,7 +13,7 @@ const ShowProfile = (props) => {
   const history = useHistory();
 
   const goToUpdateProfile = () => {
-    history.push('/profile/updateProfile');
+    history.push('/profile/updateprofile');
   }
 
   return (
