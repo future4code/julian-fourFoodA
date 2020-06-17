@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from  'axios';
+import { useHistory } from 'react-router-dom';
 import {
   UpdateProfilePageContainer,
   UpdateProfileForm,
@@ -20,11 +21,17 @@ const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/fourFoodA'
 const UpdateProfilePage = () => {
   // usePrivatePage();
 
+  const history = useHistory();
+
   const { form, onChange, resetForm } = useForm({
     name: '',
     email: '',
     cpf: ''
   });
+
+  const goToProfile = () => {
+    history.push('/profile/profileId');
+  };
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -40,9 +47,10 @@ const UpdateProfilePage = () => {
           auth: token
         }
       });
+      goToProfile();
       console.log(response.data);
-      resetForm();
     } catch (error) {
+      resetForm();
       console.error(error);
     }
   };
@@ -70,7 +78,6 @@ const UpdateProfilePage = () => {
           id="outlined-password-input"
           label="E-mail"
           type="text"
-          autoComplete="current-password"
           variant="outlined"
           placeholder="email@email.com"
           onChange={handleInputChange}
@@ -82,7 +89,6 @@ const UpdateProfilePage = () => {
           id="outlined-password-input"
           label="CPF"
           type="text"
-          autoComplete="current-password"
           variant="outlined"
           placeholder="000.000.000-00"
           onChange={handleInputChange}
