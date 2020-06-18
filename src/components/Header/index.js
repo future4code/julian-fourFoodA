@@ -18,7 +18,7 @@ const Header = () => {
       case "/profile":
         setCurrentPage("Meu perfil");
         break;
-      case "/restaurant/:restaurantId":
+      case "/restaurant":
         setCurrentPage("Restaurante");
         setHasBackButton(true);
         break;
@@ -43,7 +43,12 @@ const Header = () => {
         setCurrentPage(" ");
         break;
       default:
-        setCurrentPage('Página sem registro')
+        if(history.location.pathname.includes('/restaurant')){
+          setCurrentPage('Restaurante')
+          setHasBackButton(true);
+          break;
+        }
+        setCurrentPage('Sem registro')
     }
   });
 

@@ -19,6 +19,7 @@ const ShowAddress = (props) => {
   }, [])
 
   const goToUpdateAddress = () => {
+
     fullAddressContext.dispatch({type: "SET_FULL_ADDRESS", address: address})
     history.push('/profile/updateAddress')
   }

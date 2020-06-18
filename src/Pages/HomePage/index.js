@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { TabUncap, HomePageContainer, AppBarClean, SearchField, SearchContainer } from "./style";
-import {} from "../../styles";
+import { useHistory } from "react-router";
+import { TabUncap, HomePageContainer, AppBarClean, SearchField, SearchContainer, BottomMargin } from "./style";
+import { BeatLoader } from 'react-spinners'
 import CardContainer from "./components/CardContainer";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import FullPageLoading from "../../components/FullPageLoading";
 import usePrivatePage from "../../hooks/usePrivatePage";
 // import { getRestaurants } from '../../requests';
 import axios from "axios";
@@ -21,6 +23,7 @@ const HomePage = () => {
   const [restaurantList, setRestaurantList] = useState(undefined);
   const [category, setCategory] = useState(undefined);
 
+  const history = useHistory();
   // usePrivatePage();
 
   const baseUrl =
@@ -54,6 +57,12 @@ const HomePage = () => {
     }
   };
 
+  const goToSearchPage = () =>{
+
+    history.push(`/search`);
+
+}
+
   let categorizedList = restaurantList;
 
   switch(category){
@@ -75,7 +84,7 @@ const HomePage = () => {
     <HomePageContainer>
       <Header />
       <SearchContainer>
-      <SearchField variant='outlined' InputProps={{
+      <SearchField placeholder='Restaurante' onClick={goToSearchPage} variant='outlined' InputProps={{
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon />
@@ -107,8 +116,9 @@ const HomePage = () => {
       {restaurantList ? (
         <CardContainer restaurantList={categorizedList} />
       ) : (
-        <p></p>
+        <><FullPageLoading/></>
       )}
+      <BottomMargin/>
       <Footer />
     </HomePageContainer>
   );
