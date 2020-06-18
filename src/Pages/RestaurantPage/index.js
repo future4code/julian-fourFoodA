@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 const RestaurantPage = ({ match }) => {
   // usePrivatePage();
   const classes = useStyles();
-  const [restaurante, setRestaurante] = useState({});
+  const [restaurante, setRestaurante] = useState(undefined);
   const [listaProdutos, setListaProdutos] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [productToCart, setProductToCart] = useState(undefined);
@@ -139,7 +139,8 @@ const RestaurantPage = ({ match }) => {
   });
 
   return (
-    <RestaurantPageContainer>
+    <div>
+    {restaurante ? (<RestaurantPageContainer>
       <Header/>
 
       <CardRestaurante className={classes.root}>
@@ -266,7 +267,8 @@ const RestaurantPage = ({ match }) => {
           </BotaoModal>
         </Modal>
       ) : null}
-    </RestaurantPageContainer>
+    </RestaurantPageContainer>) : <p>Carregando</p>}
+    </div>
   );
 };
 
