@@ -71,7 +71,7 @@ const LoginPage = () => {
   return (
     <LoginPageContainer>
       <LogoImage>
-        <img src={futureFoodLogo} />
+        <img src={futureFoodLogo} alt='future-food-logo'/>
       </LogoImage>
         <Entrar>Entrar</Entrar>
       <LoginForm>
@@ -99,13 +99,14 @@ const LoginPage = () => {
           inputProps={{ maxLength: 20 }}
           onChange={handleInputChange}
         />
-        <EnterButton 
-          onClick={handleToLogin} 
-          variant="contained"
-          color="primary"  
-        >
-        Entrar
-      </EnterButton>
+          <EnterButton
+            data-testid="btn-entrar"
+            onClick={handleToLogin} 
+            variant="contained"
+            color="primary"  
+          >
+          Entrar
+        </EnterButton>
       </LoginForm>
       <p>Não possui cadastro? <span onClick={goToSigUp}>Clique aqui.</span></p>
     </LoginPageContainer>
