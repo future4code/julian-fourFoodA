@@ -7,8 +7,9 @@ import { MuiThemeProvider } from "@material-ui/core";
 const App = () => {
 
   const [cart, setCart] = useState(undefined);
+  const [inputModal, setInputModal] = useState('');
   
-  const cartValue = { cart, setCart };
+  const cartValue = { cart, setCart, inputModal, setInputModal };
 
   return (
     <CartContext.Provider value={cartValue} >
