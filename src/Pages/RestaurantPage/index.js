@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   RestaurantPageContainer,
   RestaurantTopContainer,
@@ -22,7 +22,9 @@ import { getRestaurantDetail } from "../../requests";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import IconButton from "@material-ui/core/IconButton";
 import { useForm } from "../../hooks/useForm";
-import Header from '../../components/Header'
+import Header from '../../components/Header';
+import ProductCard from '../../components/ProductCard';
+import { CartContext } from '../../contexts';
 import CardMedia from "@material-ui/core/CardMedia";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -38,31 +40,39 @@ const useStyles = makeStyles((theme) => ({
 const RestaurantPage = ({ match }) => {
   // usePrivatePage();
   const classes = useStyles();
-  const [listaRestaurante, setListaRestaurante] = useState([]);
+  const [restaurante, setRestaurante] = useState({});
   const [listaProdutos, setListaProdutos] = useState([]);
   const [isModalVisible, setIsModalVisible] = useState(false);
-  const { form, onChange, resetForm } = useForm({
-    quantidadeproduto: "",
-  });
+  const [productToCart, setProductToCart] = useState(undefined);
+  // const { form, onChange, resetForm } = useForm({
+  //   quantidadeProduto: "",
+  // });
   const restaurantId = match.params.restaurantId;
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
 
-    onChange(name, value);
-  };
+  const { cart, setCart, inputModal, setInputModal } = useContext(CartContext); {/* */}
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  // const handleInputChange = (event) => {
+  //   const { name, value } = event.target;
 
-    console.log(form);
-  };
+  //   onChange(name, value);
+  // };
+
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+
+  //   console.log(form);
+  // };
 
   const carregaDetalhes = () => {
     getRestaurantDetail(restaurantId)
       .then((response) => {
-        console.log("Peguei detalhes", response);
-        setListaRestaurante(response.restaurant);
-        setListaProdutos(response.restaurant.products);
+        // console.log("Peguei detalhes", response);
+        setRestaurante(response.restaurant);
+        // setListaProdutos(response.restaurant.products);
+        const newProductsList = response.restaurant.products.map(product => (
+          { ...product, quantity: 0 }
+        ));
+        setListaProdutos(newProductsList);
       })
       .catch((error) => {
         console.log(error);
@@ -73,17 +83,58 @@ const RestaurantPage = ({ match }) => {
     carregaDetalhes();
   }, []);
 
-  const acompanhamento = listaProdutos.filter((acompanhamentos) => {
-    return acompanhamentos.category === "Acompanhamento";
+  const addToCart = (productToAdd) => {
+    let cartList = cart ? cart.products : [];
+    if (!cartList.length) {
+      cartList = [].concat({ ...productToAdd, quantity: Number(inputModal) })
+    } else if (cartList.findIndex(product => (product.id === productToAdd.id)) === -1) {
+      cartList = [...cartList, { ...productToAdd, quantity: Number(inputModal) }]
+    } else {
+      cartList = (cart ? cart.products : []).map(productInCart => {
+        if (productInCart.id === productToAdd.id) {
+          return { ...productInCart, quantity: productInCart.quantity + Number(inputModal) };
+        }
+        return productInCart;
+      })
+    }
+    setCart({ ...restaurante, products: cartList });
+    let newList = listaProdutos;
+    cartList.forEach(productInCart => {
+      newList = listaProdutos.map(product => {
+        if (productInCart.id === product.id) {
+          return { ...product, quantity: productInCart.quantity };
+        }
+        return product;
+      })
+    });
+    setListaProdutos(newList);
+    setInputModal('');
+    setIsModalVisible(false);
+  }
+
+  const showModal = (product) => {
+    setProductToCart(product);
+    setIsModalVisible(true);
+  }
+
+  const removeProduct = (productToRemove) => {
+    const newCart = cart.products.filter(product => (
+      product.id !== productToRemove.id
+    ));
+    setCart({ ...cart, products: newCart });
+  }
+
+  const acompanhamentos = listaProdutos.filter((acompanhamento) => {
+    return acompanhamento.category === "Acompanhamento";
   });
 
-  const bebida = listaProdutos.filter((bebidas) => {
-    return bebidas.category === "Bebida";
+  const bebidas = listaProdutos.filter((bebida) => {
+    return bebida.category === "Bebida";
   });
 
-  const produtos = listaProdutos.filter((produtos) => {
+  const produtos = listaProdutos.filter((produto) => {
     return (
-      produtos.category !== "Acompanhamento" && produtos.category !== "Bebida"
+      produto.category !== "Acompanhamento" && produto.category !== "Bebida"
     );
   });
 
@@ -96,169 +147,125 @@ const RestaurantPage = ({ match }) => {
           component="img"
           alt="Imagem Hamburger"
           height="120"
-          image={listaRestaurante.logoUrl}
+          image={restaurante.logoUrl}
           title="Imagem Hamburger"
         />
         <Typography variant="body2" color="error" component="p">
-          <b>{listaRestaurante.name}</b>
+          <b>{restaurante.name}</b>
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          {listaRestaurante.category}
+          {restaurante.category}
         </Typography>
         <Typography variant="body2" color="textSecondary" component="p">
-          <span>{listaRestaurante.deliveryTime} min - </span>
-          <span> Frete R${listaRestaurante.shipping}</span>
-          <p>{listaRestaurante.address}</p>
+          <span>{restaurante.deliveryTime} min - </span>
+          <span> Frete R${restaurante.shipping}</span>
+          <p>{restaurante.address}</p>
         </Typography>
       </CardRestaurante>
       <ContainerPrincipais>
         <b>Principais</b>
       </ContainerPrincipais>
-      {produtos.map((produtos) => (
-        <CardProduto key={produtos.id}>
-          <ImgProduto src={produtos.photoUrl} alt="imagem produto" />
+      {produtos.map(produto => (
+        <ProductCard key={produto.id} product={produto} showModal={showModal} remove={removeProduct} />
+      ))}
+      {/* {produtos.map((produto) => (
+        <CardProduto key={produto.id}>
+          <ImgProduto src={produto.photoUrl} alt="imagem produto" />
           <CardDescricaoProduto>
-            <NomeProduto>{produtos.name}</NomeProduto>
-            <Quantidade>{form.quantidadeproduto}</Quantidade>
+            <NomeProduto>{produto.name}</NomeProduto>
+            <Quantidade>{produto.quantity}</Quantidade> 
 
-            <Ingredientes>{produtos.description}</Ingredientes>
+            <Ingredientes>{produto.description}</Ingredientes>
 
             <Preco>
-              <b>R${produtos.price}</b>
+              <b>R${produto.price}</b>
             </Preco>
-            <BotaoAdicionar onClick={() => setIsModalVisible(true)}>
+            <BotaoAdicionar onClick={() => showModal(produto)}>
               adicionar
             </BotaoAdicionar>
-            {isModalVisible ? (
-              <Modal>
-                <p>Selecione a quantidade desejada</p>
-                <SelectModal
-                  type="number"
-                  name="quantidadeproduto"
-                  value={form.quantidadeproduto}
-                  onChange={handleInputChange}
-                >
-                  <option value="" disabled selected>
-                    0
-                  </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                </SelectModal>
-                <BotaoModal onClick={() => setIsModalVisible(false)}>
-                  ADICIONAR AO CARRINHO
-                </BotaoModal>
-              </Modal>
-            ) : null}
           </CardDescricaoProduto>
         </CardProduto>
-      ))}
+      ))} */}
 
       <ContainerPrincipais>
         <b>Acompanhamentos</b>
       </ContainerPrincipais>
-      {acompanhamento.map((categorias) => (
-        <CardProduto key={categorias.id}>
-          <ImgProduto src={categorias.photoUrl} alt="imagem produto" />
+      {acompanhamentos.map(acompanhamento => (
+        <ProductCard key={acompanhamento.id} product={acompanhamento} showModal={showModal} remove={removeProduct} />
+      ))}
+      {/* {acompanhamentos.map((acompanhamento) => (
+        <CardProduto key={acompanhamento.id}>
+          <ImgProduto src={acompanhamento.photoUrl} alt="imagem produto" />
           <CardDescricaoProduto>
-            <NomeProduto>{categorias.name}</NomeProduto>
-            <Quantidade>2</Quantidade>
+            <NomeProduto>{acompanhamento.name}</NomeProduto>
+            <Quantidade>{acompanhamento.quantity}</Quantidade> 
 
-            <Ingredientes>{categorias.description}</Ingredientes>
+            <Ingredientes>{acompanhamento.description}</Ingredientes>
 
             <Preco>
-              <b>R${categorias.price}</b>
+              <b>R${acompanhamento.price}</b>
             </Preco>
-            <BotaoAdicionar onClick={() => setIsModalVisible(true)}>
+            <BotaoAdicionar onClick={() => showModal(acompanhamento)}>
               adicionar
             </BotaoAdicionar>
-            {isModalVisible ? (
-              <Modal>
-                <p>Selecione a quantidade desejada</p>
-                <SelectModal
-                  type="number"
-                  name="quantidadeproduto"
-                  value={form.quantidadeproduto}
-                  onChange={handleInputChange}
-                >
-                  <option value="" disabled selected>
-                    0
-                  </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                </SelectModal>
-                <BotaoModal onClick={() => setIsModalVisible(false)}>
-                  ADICIONAR AO CARRINHO
-                </BotaoModal>
-              </Modal>
-            ) : null}
           </CardDescricaoProduto>
         </CardProduto>
-      ))}
+      ))} */}
       <ContainerPrincipais>
         <b>Bebidas</b>
       </ContainerPrincipais>
-      {bebida.map((bebidas) => (
-        <CardProduto key={bebidas.id}>
-          <ImgProduto src={bebidas.photoUrl} alt="imagem produto" />
+      {bebidas.map(bebida => (
+        <ProductCard key={bebida.id} product={bebida} showModal={showModal} remove={removeProduct} />
+      ))}
+      {/* {bebidas.map((bebida) => (
+        <CardProduto key={bebida.id}>
+          <ImgProduto src={bebida.photoUrl} alt="imagem produto" />
           <CardDescricaoProduto>
-            <NomeProduto>{bebidas.name}</NomeProduto>
-            <Quantidade>2</Quantidade>
+            <NomeProduto>{bebida.name}</NomeProduto>
+            <Quantidade>{bebida.quantity}</Quantidade>
 
-            <Ingredientes>{bebidas.description}</Ingredientes>
+            <Ingredientes>{bebida.description}</Ingredientes>
 
             <Preco>
-              <b>R${bebidas.price}</b>
+              <b>R${bebida.price}</b>
             </Preco>
-            <BotaoAdicionar onClick={() => setIsModalVisible(true)}>
+            <BotaoAdicionar onClick={() => showModal(bebida)}>
               adicionar
             </BotaoAdicionar>
-            {isModalVisible ? (
-              <Modal>
-                <p>Selecione a quantidade desejada</p>
-                <SelectModal
-                  type="number"
-                  name="quantidadeproduto"
-                  value={form.quantidadeproduto}
-                  onChange={handleInputChange}
-                >
-                  <option value="" disabled selected>
-                    0
-                  </option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                  <option>7</option>
-                  <option>8</option>
-                  <option>9</option>
-                  <option>10</option>
-                </SelectModal>
-                <BotaoModal onClick={() => setIsModalVisible(false)}>
-                  ADICIONAR AO CARRINHO
-                </BotaoModal>
-              </Modal>
-            ) : null}
           </CardDescricaoProduto>
+          
         </CardProduto>
-      ))}
+      ))} */}
+      {isModalVisible ? (
+        <Modal>
+          <p>Selecione a quantidade desejada</p>
+          <SelectModal
+            type="number"
+            name="quantidadeProduto"
+            // value={form.quantidadeProduto}
+            // onChange={handleInputChange}
+            value={inputModal} 
+            onChange={event => setInputModal(event.target.value) } 
+          >
+            <option defaultValue="">
+              0
+            </option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+            <option>10</option>
+          </SelectModal>
+          <BotaoModal onClick={() => addToCart(productToCart)}>
+            ADICIONAR AO CARRINHO
+          </BotaoModal>
+        </Modal>
+      ) : null}
     </RestaurantPageContainer>
   );
 };
