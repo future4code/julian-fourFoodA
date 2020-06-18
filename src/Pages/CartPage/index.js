@@ -14,6 +14,7 @@ import {
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import ProductCard from '../../components/ProductCard';
+import FullPageLoading from '../../components/FullPageLoading';
 import ShowAddress from './components/ShowAddress';
 import PaymentMethod from './components/PaymentMethod';
 import usePrivatePage from '../../hooks/usePrivatePage';
@@ -22,22 +23,9 @@ import { getProfile, placeOrder } from '../../requests';
 
 const CartPage = () => {
 
-  // usePrivatePage();
+  usePrivatePage();
 
   const { cart, setCart } = useContext(CartContext);
-
-  // const body = [
-  //   {
-  //     products: [{
-  //       "id": "CnKdjU6CyKakQDGHzNln",
-  //       "quantity": 10
-  //     }, {
-  //       "quantity": 1,
-  //       "id": "KJqMl2DxeShkSBevKVre"
-  //     }],
-  //     paymentMethod: 'creditcard'
-  //   }
-  // ];
 
   const [shippingAddress, setShippingAddress] = useState(undefined);
 
@@ -95,40 +83,43 @@ const CartPage = () => {
   return (
     <PageContainer>
       <Header />
-      <FormContainer onSubmit={goToPlaceOrder} >
-        <AddressContainer>
-          <ShowAddress address={shippingAddress} />
-        </AddressContainer>
-        <OrderContainer>
-          {(cart ? ((cart.products || []).length ? (
-            <RestaurantContainer>
-              <p>{cart.name}</p>
-              <p>{cart.address}</p>
-              <p>{`${cart.deliveryTime} min`}</p>
-            </RestaurantContainer>
-          ) : null) : null)}
-          {(cart ? cart.products : []).length ? cart.products.map(product => (
-            <ProductCard key={product.id} product={product} showModal={() => null} remove={removeProduct} />
-          )) : <p>Carrinho vazio</p>}
-          <TotalContainer>
-            <p>SUBTOTAL</p>
-            <div>
-              <p>{`Frete R$${(cart ? (cart.products.length ? cart.shipping.toFixed(2) : '0,00') : '0,00')}`}</p>
-              <p>{`R$${(cart? (cart.products.length ? (subtotal + cart.shipping).toFixed(2) : '00,00') : '00,00')}`}</p>
-            </div>
-          </TotalContainer>
-        </OrderContainer>
-        <PaymentContainer>
-          <PaymentMethod payment={payment} />
-          <FormButton 
-            type='submit'
-            color='primary' 
-            variant='contained' 
-          >
-            Confirmar
-          </FormButton>
-        </PaymentContainer>
-      </FormContainer>
+      {shippingAddress ? (
+        <FormContainer onSubmit={goToPlaceOrder} >
+          <AddressContainer>
+            <ShowAddress address={shippingAddress} />
+          </AddressContainer>
+          <OrderContainer>
+            {(cart ? ((cart.products || []).length ? (
+              <RestaurantContainer>
+                <p>{cart.name}</p>
+                <p>{cart.address}</p>
+                <p>{`${cart.deliveryTime} min`}</p>
+              </RestaurantContainer>
+            ) : null) : null)}
+            {(cart ? cart.products : []).length ? cart.products.map(product => (
+              <ProductCard key={product.id} product={product} showModal={() => null} remove={removeProduct} />
+            )) : <p>Carrinho vazio</p>}
+            <TotalContainer>
+              <p>SUBTOTAL</p>
+              <div>
+                <p>{`Frete R$${(cart ? (cart.products.length ? cart.shipping.toFixed(2) : '0,00') : '0,00')}`}</p>
+                <p>{`R$${(cart? (cart.products.length ? (subtotal + cart.shipping).toFixed(2) : '00,00') : '00,00')}`}</p>
+              </div>
+            </TotalContainer>
+          </OrderContainer>
+          <PaymentContainer>
+            <PaymentMethod payment={payment} />
+            <FormButton 
+              type='submit'
+              color='primary' 
+              variant='contained' 
+              disabled={(cart ? (cart.products.length ? false : true) : true)}
+            >
+              Confirmar
+            </FormButton>
+          </PaymentContainer>
+        </FormContainer>
+      ) : <><FullPageLoading/></> }
       <Footer />
     </PageContainer>
   )
