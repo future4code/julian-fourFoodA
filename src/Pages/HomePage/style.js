@@ -29,3 +29,6 @@ export const AppBarClean = styled(AppBar)`
   box-shadow: none;
 }
 `
+export const BottomMargin = styled.div`
+  margin-bottom: 65px;
+`

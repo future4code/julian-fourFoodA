@@ -9,7 +9,7 @@ const usePrivatePage = () => {
     const token = window.localStorage.getItem('token');
 
     if (!token) {
-      history.push('/');
+      history.push('/login');
     }
   }, [history]);
 }

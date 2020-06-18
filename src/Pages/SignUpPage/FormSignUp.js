@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
+import axios from 'axios'
 import useForm from '../../hooks/useForm';
-import { signUp } from '../../requests';
 import { useHistory } from 'react-router-dom';
 import { Form } from './style';
 import {
@@ -18,6 +18,8 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import IconButton from '@material-ui/core/IconButton';
 import InputAdornment from '@material-ui/core/InputAdornment';
+
+const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/fourFoodA';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,9 +38,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FormSignUp = () => {
-    const history = useHistory();
-    let [typePass, setTypePass] = useState('password');
-    const classes = useStyles();
+  const history = useHistory();
+  let [typePass, setTypePass] = useState('password');
+  const classes = useStyles();
 
 
   const handleMouseDownPassword = (event) => {
@@ -62,13 +64,7 @@ const FormSignUp = () => {
     onChange(name, value);
   }
 
-  const bodyRequest = {
-	"name": name,
-	"email": email,
-	"cpf": cpf,
-	"password": confirmPassword
-}
-
+  
   const changeType = () => {
     if(typePass === 'password') {
       setTypePass('text')
@@ -78,11 +74,30 @@ const FormSignUp = () => {
     }
   }
 
+  const signUp = async (body) => {
+    try {
+      const response = await axios.post(`${baseUrl}/signup`, body);
+      alert("Usuário cadastrado com sucesso!")
+      localStorage.setItem('token', response.data.token)
+      history.push('/addaddress')
+
+    } catch (error) {
+      alert("Algo deu errado, tente novamente.")
+      return error.response;
+    }
+  }
+
+  const bodyRequest = {
+    "name": name,
+    "email": email,
+    "cpf": cpf,
+    "password": confirmPassword
+  }
+
   const signUpSubmit = async (event) => {
     event.preventDefault();
     if(password === confirmPassword) {
       await signUp(bodyRequest)
-      history.push('/addaddress')
     } else {
       alert("Por favor, insira uma senha igual nos campos de senha e confirmação:")
     }
@@ -130,7 +145,7 @@ const FormSignUp = () => {
             />
            </FormFormControl>
            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Senha *</InputLabel>
+            <InputLabel data-testeid="password" htmlFor="outlined-adornment-password">Senha *</InputLabel>
             <OutlinedInput
               required
               type={typePass}
@@ -153,7 +168,7 @@ const FormSignUp = () => {
             />
           </FormControl>
            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Confirmar *</InputLabel>
+            <InputLabel data-testid="confirmPassword" htmlFor="outlined-adornment-password">Confirmar *</InputLabel>
             <OutlinedInput
               required
               type={typePass}
