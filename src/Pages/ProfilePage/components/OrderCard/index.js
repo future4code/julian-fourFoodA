@@ -5,13 +5,28 @@ import {
 
 const OrderCard = (props) => {
 
-  // const { id, name, email, cpf } = props.order;
+  const { restaurantName, totalPrice, createdAt, expiresAt } = props.order;
+
+  const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+  const formatDate = (date) => {
+    const newDate = new Date(date);
+    const day = newDate.getDate();
+    let month = newDate.getMonth();
+    months.forEach((monthOfYear, idx) => {
+      if (idx === month) {
+        month = monthOfYear;
+      }
+    })
+    const year = newDate.getFullYear();
+    return `${day} ${month} ${year}`
+  }
 
   return (
     <OrderContainer>
-      <p>Bullguer Vila Madalena</p>
-      <p>23 outubro 2019</p>
-      <p>Subtotal: R$67,00</p>
+      <p>{restaurantName}</p>
+      <p>{formatDate(createdAt)}</p>
+      <p>{`Subtotal: R$${totalPrice.toFixed(2)}`}</p>
     </OrderContainer>
   )
 }
