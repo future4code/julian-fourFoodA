@@ -7,11 +7,6 @@ export const FormContainer = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
-  /* > p {
-    align-self: center;
-    margin: 1em 0 0 0;
-    padding: .75em;
-  } */
 `
 export const AddressContainer = styled.div`
   background-color: #eee;
@@ -21,6 +16,16 @@ export const OrderContainer = styled.div`
   > p {
     text-align: center;
     margin: 1.25em 0 2.25em 0;
+  }
+`
+export const RestaurantContainer = styled.div`
+  margin: 1em;
+  > p {
+    color: #b8b8b8;
+    margin: .5em;
+  }
+  > p:first-of-type {
+    color: #e8222e;
   }
 `
 export const TotalContainer = styled.div`

@@ -52,16 +52,12 @@ export const getFullAddress = async () => {
 }
 
 export const getProfile = async () => {
-  try {
-    const response = await axios.get(`${baseUrl}/profile`, {
-      headers: {
-        auth: token
-      }
-    });
-    return response.data.user;
-  } catch (error) {
-    return error.response;
-  }
+  const response = await axios.get(`${baseUrl}/profile`, {
+    headers: {
+      auth: token
+    }
+  });
+  return response.data;
 }
 
 /**export const updateProfile = async (body) => {

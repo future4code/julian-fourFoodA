@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import {
   FormContainer,
   AddressContainer,
+  RestaurantContainer,
   OrderContainer,
   TotalContainer,
   PaymentContainer
@@ -44,35 +45,6 @@ const CartPage = () => {
 
   const payment = [paymentMethod, setPaymentMethod];
 
-  // const cart = {
-  //   "products": [
-  //     {
-  //       "id": "XHhajKAtvIH2Dq6F83PX",
-  //       "description": "Laranja, Acerola ou Maçã",
-  //       "price": 7.9,
-  //       "photoUrl": "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031439_71805445.jpg",
-  //       "name": "Suco",
-  //       'quantity': 4
-  //     },
-  //     {
-  //       "id": "xhq0QgZXklGSmaBDy6KQ",
-  //       "description": "Esfiha deliciosa, receita secreta do Habibs.",
-  //       "price": 1,
-  //       "photoUrl": "https://static-images.ifood.com.br/image/upload/f_auto,t_high/pratos/65c38aa8-b094-413d-9a80-ddc256bfcc78/201907031404_66194495.jpg",
-  //       "name": "Bibsfiha carne",
-  //       'quantity': 2
-  //     }
-  //   ],
-  //   "id": "1",
-  //   "address": "Rua das Margaridas, 110 - Jardim das Flores",
-  //   "logoUrl": "http://soter.ninja/futureFoods/logos/habibs.jpg",
-  //   "deliveryTime": 60,
-  //   "name": "Habibs",
-  //   "shipping": 6
-  // }
-
-  const { id, name, products, address, logoUrl, deliveryTime, shipping } = cart
-
   useEffect(() => {
     getShippingAddress()
   }, [setShippingAddress]);
@@ -89,7 +61,7 @@ const CartPage = () => {
 
   const getSubtotal = () => {
     let subtotal = 0;
-    products.forEach(product => {
+    (cart ? cart.products : []).forEach(product => {
       subtotal += product.quantity * product.price;
     })
     return subtotal
@@ -104,22 +76,45 @@ const CartPage = () => {
     setCart({ ...cart, products: newCart});
   }
 
+  const goToPlaceOrder = (event) => {
+    event.preventDefault();
+    const products = (cart ? cart.products : []).map(product => (
+      { id: product.id, quantity: product.quantity }
+    ));
+    const body = { products, paymentMethod }
+    placeOrder(body, cart.id)
+    .then(response => {
+      setCart(undefined);
+      console.log(response);
+    })
+    .catch(error => {
+      console.error(error);
+    })
+  }
+
   return (
     <PageContainer>
       <Header />
-      <FormContainer>
+      <FormContainer onSubmit={goToPlaceOrder} >
         <AddressContainer>
           <ShowAddress address={shippingAddress} />
         </AddressContainer>
         <OrderContainer>
-          {products.length ? products.map(product => (
+          {(cart ? ((cart.products || []).length ? (
+            <RestaurantContainer>
+              <p>{cart.name}</p>
+              <p>{cart.address}</p>
+              <p>{`${cart.deliveryTime} min`}</p>
+            </RestaurantContainer>
+          ) : null) : null)}
+          {(cart ? cart.products : []).length ? cart.products.map(product => (
             <ProductCard key={product.id} product={product} showModal={() => null} remove={removeProduct} />
           )) : <p>Carrinho vazio</p>}
           <TotalContainer>
             <p>SUBTOTAL</p>
             <div>
-              <p>{`Frete R$${shipping.toFixed(2)}`}</p>
-              <p>{`R$${subtotal.toFixed(2)}`}</p>
+              <p>{`Frete R$${(cart ? (cart.products.length ? cart.shipping.toFixed(2) : '0,00') : '0,00')}`}</p>
+              <p>{`R$${(cart? (cart.products.length ? (subtotal + cart.shipping).toFixed(2) : '00,00') : '00,00')}`}</p>
             </div>
           </TotalContainer>
         </OrderContainer>
