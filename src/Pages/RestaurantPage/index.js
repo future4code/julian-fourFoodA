@@ -15,6 +15,7 @@ import {
   NomeProduto,
   SelectModal,
   BotaoModal,
+  LoadingContainer
 } from "./style";
 import { useHistory } from 'react-router'
 import usePrivatePage from "../../hooks/usePrivatePage";
@@ -23,6 +24,7 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import IconButton from "@material-ui/core/IconButton";
 import { useForm } from "../../hooks/useForm";
 import Header from '../../components/Header';
+import FullPageLoading from '../../components/FullPageLoading';
 import ProductCard from '../../components/ProductCard';
 import { CartContext } from '../../contexts';
 import CardMedia from "@material-ui/core/CardMedia";
@@ -140,8 +142,8 @@ const RestaurantPage = ({ match }) => {
 
   return (
     <div>
+    <Header/>
     {restaurante ? (<RestaurantPageContainer>
-      <Header/>
 
       <CardRestaurante className={classes.root}>
         <CardMedia
@@ -267,7 +269,7 @@ const RestaurantPage = ({ match }) => {
           </BotaoModal>
         </Modal>
       ) : null}
-    </RestaurantPageContainer>) : <p>Carregando</p>}
+    </RestaurantPageContainer>) : <><FullPageLoading/></>}
     </div>
   );
 };
