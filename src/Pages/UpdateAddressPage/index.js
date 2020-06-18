@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 import { FormContainer } from './style';
@@ -12,39 +12,21 @@ import Header from '../../components/Header';
 import usePrivatePage from '../../hooks/usePrivatePage';
 import useForm from '../../hooks/useForm';
 import { addAddress } from '../../requests';
+import FullAddressContext from '../../contexts/FullAddressContext';
 
-const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/fourFoodA';
 
 const UpdateAddressPage = () => {
+  const fullAddressContext = useContext(FullAddressContext);
+
     usePrivatePage();
-    const [address, setAddress] = useState({});
-
-    useEffect(() => {
-      getFullAddress();
-    }, [])
-
-    const getFullAddress = async () => {
-      try {
-        const response = await axios.get(`${baseUrl}/profile/address`, {
-          headers: {
-            auth: localStorage.token
-          }
-        })
-        setAddress(response.data.address)
-      } catch (error) {
-        return error.response;
-      }
-    }
     
-    console.log(address)
-
     const { form, onChange } = useForm({
-      street: '',
-      number: address.number,
-      complement:address.complement,
-      neighbourhood: address.neighbourhood,
-      city: address.city,
-      state: address.state
+      street: `${fullAddressContext.address.street}`,
+      number: `${fullAddressContext.address.number}`,
+      complement: `${fullAddressContext.address.complement}`,
+      neighbourhood: `${fullAddressContext.address.neighbourhood}`,
+      city: `${fullAddressContext.address.city}`,
+      state: `${fullAddressContext.address.state}`
     })
 
     const { street, number, complement, neighbourhood, city, state } = form;
@@ -69,7 +51,7 @@ const UpdateAddressPage = () => {
     return (
       <PageContainer>
         <Header />
-        <FormContainer onSubmit={goToAddAddress} >
+          <FormContainer onSubmit={goToAddAddress} >
           <FormFormControl>
             <FormTextField
               name='street'

@@ -145,7 +145,7 @@ const FormSignUp = () => {
             />
            </FormFormControl>
            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Senha *</InputLabel>
+            <InputLabel data-testeid="password" htmlFor="outlined-adornment-password">Senha *</InputLabel>
             <OutlinedInput
               required
               type={typePass}
@@ -168,7 +168,7 @@ const FormSignUp = () => {
             />
           </FormControl>
            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-password">Confirmar *</InputLabel>
+            <InputLabel data-testid="confirmPassword" htmlFor="outlined-adornment-password">Confirmar *</InputLabel>
             <OutlinedInput
               required
               type={typePass}
