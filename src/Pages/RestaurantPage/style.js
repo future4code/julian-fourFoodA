@@ -18,9 +18,13 @@ export const ContainerBotao = styled.div`
 `;
 
 export const CardRestaurante = styled(Card)`
-  margin: 17px auto;
-  box-shadow: none;
-  border: none;
+  && {
+    margin: 17px auto;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    border: 1px solid #b8b8b8;
+  }
 `;
 
 export const ContainerPrincipais = styled.p`
@@ -66,8 +70,8 @@ export const BotaoAdicionar = styled.button`
   width: 90px;
   height: 31px;
   position: absolute;
-  justify-self: end;
-  align-self: flex-end;
+  /* justify-self: end;
+  align-self: flex-end; */
   border: 1px solid black;
   border-top-left-radius: 8px;
   border-bottom-right-radius: 8px;
