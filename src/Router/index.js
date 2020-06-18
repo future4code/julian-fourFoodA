@@ -10,44 +10,26 @@ import ProfilePage from '../Pages/ProfilePage';
 import UpdateProfilePage from '../Pages/UpdateProfilePage';
 import UpdateAddressPage from '../Pages/UpdateAddressPage';
 import SearchPage from '../Pages/SearchPage';
+import OpeningPage from '../Pages/OpeningPage';
 
 const Router = () => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path='/'>
-          <LoginPage />
-        </Route>
-        <Route exact path='/signup'>
-          <SignUpPage />
-        </Route>
-        <Route exact path='/addaddress'>
-          <AddAddressPage />
-        </Route>
-        <Route exact path='/home'>
-          <HomePage />
-        </Route>
-        <Route exact path='/restaurant/:restaurantId'>
-          <RestaurantPage />
-        </Route>
-        <Route exact path='/cart'>
-          <CartPage />
-        </Route>
-        <Route exact path='/profile'>
-          <ProfilePage />
-        </Route>
-        <Route exact path='/profile/updateProfile'>
-          <UpdateProfilePage />
-        </Route>
-        <Route exact path='/profile/updateAddress'>
-          <UpdateAddressPage />
-        </Route>
-        <Route exact path='/search'>
-          <SearchPage />
-        </Route>
+        <Route exact path='/' component={OpeningPage}/>
+        <Route exact path="/login" component={LoginPage}/>
+        <Route exact path="/signup" component={SignUpPage}/>
+        <Route exact path="/addaddress" component={AddAddressPage}/>
+        <Route exact path="/home" component={HomePage}/>
+        <Route exact path="/restaurant/:restaurantId" component={RestaurantPage}/>
+        <Route exact path="/cart" component={CartPage}/>
+        <Route exact path='/profile' component={ProfilePage}/>
+        <Route exact path='/profile/updateprofile' component={UpdateProfilePage}/>
+        <Route exact path='/profile/updateaddress' component={UpdateAddressPage}/>
+        <Route exact path='/search' component={SearchPage}/>
       </Switch>
     </BrowserRouter>
-  )
-}
+  );
+};
 
 export default Router;

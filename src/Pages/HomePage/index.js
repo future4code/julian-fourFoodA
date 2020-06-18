@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { TabUncap, HomePageContainer, AppBarClean, SearchField, SearchContainer } from "./style";
+import { useHistory } from "react-router";
+import { TabUncap, HomePageContainer, AppBarClean, SearchField, SearchContainer, BottomMargin } from "./style";
 import {} from "../../styles";
 import CardContainer from "./components/CardContainer";
 import Header from "../../components/Header";
@@ -21,6 +22,7 @@ const HomePage = () => {
   const [restaurantList, setRestaurantList] = useState(undefined);
   const [category, setCategory] = useState(undefined);
 
+  const history = useHistory();
   // usePrivatePage();
 
   const baseUrl =
@@ -54,6 +56,12 @@ const HomePage = () => {
     }
   };
 
+  const goToSearchPage = () =>{
+
+    history.push(`/search`);
+
+}
+
   let categorizedList = restaurantList;
 
   switch(category){
@@ -75,7 +83,7 @@ const HomePage = () => {
     <HomePageContainer>
       <Header />
       <SearchContainer>
-      <SearchField variant='outlined' InputProps={{
+      <SearchField placeholder='Restaurante' onClick={goToSearchPage} variant='outlined' InputProps={{
           startAdornment: (
             <InputAdornment position="start">
               <SearchIcon />
@@ -109,6 +117,7 @@ const HomePage = () => {
       ) : (
         <p></p>
       )}
+      <BottomMargin/>
       <Footer />
     </HomePageContainer>
   );
