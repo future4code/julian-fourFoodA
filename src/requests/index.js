@@ -16,19 +16,30 @@ export const login = async (body) => {
 
 
 export const signUp = async (body) => {
-
-  const response = await axios.post(`${baseUrl}/signup`, body);
-  alert("Usuário cadastrado com sucesso!")
-  return response.data;
+  try {
+    const response = await axios.post(`${baseUrl}/signup`, body);
+    alert("Usuário cadastrado com sucesso!")
+    return response.data;
+  } catch (error) {
+    alert("Algo deu errado, tente novamente.")
+    return error.response;
+  }
 }
 
 export const addAddress = async (body) => {
-  const response = await axios.put(`${baseUrl}/address`, body, {
-    headers: {
-      auth: token
-    }
-  });
-  return response.data;
+  try {
+    const response = await axios.put(`${baseUrl}/address`, body, {
+      headers: {
+        auth: token
+      }
+    });
+    alert("Endereço cadastrado com sucesso")
+    return response.data;
+  } catch (error) {
+    alert("Tente novamente")
+    return error.response;
+    
+  }
 }
 
 export const getFullAddress = async () => {
@@ -41,12 +52,16 @@ export const getFullAddress = async () => {
 }
 
 export const getProfile = async () => {
-  const response = await axios.get(`${baseUrl}/profile`, {
-    headers: {
-      auth: token
-    }
-  });
-  return response.data;
+  try {
+    const response = await axios.get(`${baseUrl}/profile`, {
+      headers: {
+        auth: token
+      }
+    });
+    return response.data.user;
+  } catch (error) {
+    return error.response;
+  }
 }
 
 /**export const updateProfile = async (body) => {
