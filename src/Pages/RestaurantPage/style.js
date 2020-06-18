@@ -20,6 +20,7 @@ export const ContainerBotao = styled.div`
 export const CardRestaurante = styled(Card)`
   margin: 17px auto;
   box-shadow: none;
+  border: none;
 `;
 
 export const ContainerPrincipais = styled.p`
