@@ -24,7 +24,7 @@ const HomePage = () => {
   const [category, setCategory] = useState(undefined);
 
   const history = useHistory();
-  // usePrivatePage();
+  usePrivatePage();
 
   const baseUrl =
     "https://us-central1-missao-newton.cloudfunctions.net/fourFoodA";
@@ -40,14 +40,13 @@ const HomePage = () => {
       })
       .then((res) => {
         setRestaurantList(res.data.restaurants);
-        console.log(res.data.restaurants);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     getRestaurants();
-  }, []);
+  }, [setRestaurantList]);
 
   const handleChange = (event, newCategory) => {
     if (newCategory !== category) {
@@ -61,7 +60,7 @@ const HomePage = () => {
 
     history.push(`/search`);
 
-}
+  }
 
   let categorizedList = restaurantList;
 
@@ -103,14 +102,16 @@ const HomePage = () => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <TabUncap data-testid="Hamburguer" value="Hamburguer" label="Hamburguer" {...a11yProps(0)} />
-          <TabUncap data-testid="Asiática" value='Asiática' label="Asiática" {...a11yProps(1)} />
-          <TabUncap data-testid="Italiana" value='Italiana' label="Italiana" {...a11yProps(2)} />
-          <TabUncap data-testid="Sorvetes" value='Sorvetes' label="Sorvetes" {...a11yProps(3)} />
-          <TabUncap data-testid="Carnes" value='Carnes' label="Carnes" {...a11yProps(4)} />
-          <TabUncap data-testid="Baiana" value='Baiana' label="Baiana" {...a11yProps(5)} />
-          <TabUncap data-testid="Petiscos" value='Petiscos' label="Petiscos" {...a11yProps(6)} />
-          <TabUncap data-testid="Mexicana" value='Mexicana' label="Mexicana" {...a11yProps(7)} />
+
+          <TabUncap key={0} data-testid="Hamburguer" value="Hamburguer" label="Hamburguer" {...a11yProps(0)} />
+          <TabUncap key={1} data-testid="Asiática" value='Asiática' label="Asiática" {...a11yProps(1)} />
+          <TabUncap key={2} data-testid="Italiana" value='Italiana' label="Italiana" {...a11yProps(2)} />
+          <TabUncap key={3} data-testid="Sorvetes" value='Sorvetes' label="Sorvetes" {...a11yProps(3)} />
+          <TabUncap key={4} data-testid="Carnes" value='Carnes' label="Carnes" {...a11yProps(4)} />
+          <TabUncap key={5} data-testid="Baiana" value='Baiana' label="Baiana" {...a11yProps(5)} />
+          <TabUncap key={6} data-testid="Petiscos" value='Petiscos' label="Petiscos" {...a11yProps(6)} />
+          <TabUncap key={7} data-testid="Mexicana" value='Mexicana' label="Mexicana" {...a11yProps(7)} />
+
         </Tabs>
       </AppBarClean>
       {restaurantList ? (
