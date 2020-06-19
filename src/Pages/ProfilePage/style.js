@@ -3,6 +3,7 @@ import {
 } from '@material-ui/core';
 
 export const ProfilePageContainer = styled.div`
+  margin-bottom: 65px;
 `
 export const ProfileContainer = styled.div`
   margin: .5em 0;

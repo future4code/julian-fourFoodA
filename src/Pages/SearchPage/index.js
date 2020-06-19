@@ -17,6 +17,7 @@ import {
 import axios from "axios";
 
 const SearchPage = () => {
+  usePrivatePage();
   const [restaurantList, setRestaurantList] = useState(undefined);
   const [searchValue, setSearchValue] = useState("");
 
@@ -36,14 +37,13 @@ const SearchPage = () => {
       })
       .then((res) => {
         setRestaurantList(res.data.restaurants);
-        console.log(res.data.restaurants);
       })
       .catch((err) => console.log(err));
   };
 
   useEffect(() => {
     getRestaurants();
-  }, []);
+  }, [setRestaurantList]);
 
   let filteredList = undefined;
 

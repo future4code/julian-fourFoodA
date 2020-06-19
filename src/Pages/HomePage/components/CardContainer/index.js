@@ -13,7 +13,7 @@ const CardContainer = (props) => {
     <ContainerRestaurantes>
       {receivedList ? (
         receivedList.map((restaurant) => {
-          return <RestaurantCard restaurant={restaurant} />;
+          return <RestaurantCard restaurant={restaurant} key={restaurant.id} />;
         })
       ) : (
         <p>Carregando...</p>

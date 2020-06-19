@@ -4,13 +4,17 @@ import ProfileIcon from '@material-ui/icons/PersonOutline';
 import { Card, Button } from "@material-ui/core";
 import styled from 'styled-components';
 
-const FooterContainer = styled(Card)`
-&&{
-  display: flex;
-  justify-content: space-around;
+export const FooterContainer = styled.div`
   position: fixed;
   bottom: 0;
   left: 0;
+  width: 100%;
+`
+
+const CardFooterContainer = styled(Card)`
+&&{
+  display: flex;
+  justify-content: space-around;
   width: 100%;
   height: 55px;
   border-radius: 0;
@@ -39,4 +43,4 @@ const ProfileStlIcon = styled(ProfileIcon)`
 `
 
 
-export { FooterContainer, CartStlIcon, HomeStlIcon, ProfileStlIcon, BarButton }
+export { CardFooterContainer, CartStlIcon, HomeStlIcon, ProfileStlIcon, BarButton }
