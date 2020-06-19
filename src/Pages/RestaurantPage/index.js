@@ -7,10 +7,10 @@ import {
   BotaoModal,
   LoadingContainer
 } from "./style";
-import { useHistory } from 'react-router'
 import usePrivatePage from "../../hooks/usePrivatePage";
 import { getRestaurantDetail } from "../../requests";
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import FullPageLoading from '../../components/FullPageLoading';
 import ProductCard from '../../components/ProductCard';
 import { CartContext } from '../../contexts';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 
 const RestaurantPage = ({ match }) => {
 
-  // usePrivatePage();
+  usePrivatePage();
   const classes = useStyles();
   const [restaurante, setRestaurante] = useState(undefined);
   const [listaProdutos, setListaProdutos] = useState([]);
@@ -211,6 +211,7 @@ const RestaurantPage = ({ match }) => {
         </Modal>
       ) : null}
     </RestaurantPageContainer>) : <><FullPageLoading/></>}
+    <Footer />
     </div>
   );
 };

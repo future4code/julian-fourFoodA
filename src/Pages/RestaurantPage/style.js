@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Card from "@material-ui/core/Card";
 
-export const RestaurantPageContainer = styled.div``;
+export const RestaurantPageContainer = styled.div`
+  margin-bottom: 65px;
+`;
 
 export const RestaurantTopContainer = styled.div`
   width: 100%;
