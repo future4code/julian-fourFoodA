@@ -43,10 +43,6 @@ const FormSignUp = () => {
   const classes = useStyles();
 
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
-
   const { form, onChange } = useForm({
     name: '',
     email: '',
@@ -145,19 +141,19 @@ const FormSignUp = () => {
             />
            </FormFormControl>
            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-            <InputLabel data-testeid="password" htmlFor="outlined-adornment-password">Senha *</InputLabel>
+            <InputLabel  htmlFor="outlined-adornment-password">Senha *</InputLabel>
             <OutlinedInput
               required
               type={typePass}
               value={password}
               name="password"
+              inputProps={{"data-testid": "password"}}
               onChange={handleInputChange}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={changeType}
-                    onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
                     {typePass === 'text' ? <Visibility /> : <VisibilityOff />}
@@ -168,19 +164,19 @@ const FormSignUp = () => {
             />
           </FormControl>
            <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-            <InputLabel data-testid="confirmPassword" htmlFor="outlined-adornment-password">Confirmar *</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-password">Confirmar *</InputLabel>
             <OutlinedInput
               required
               type={typePass}
               value={confirmPassword}
               name="confirmPassword"
+              inputProps={{"data-testid": "confirm"}}
               onChange={handleInputChange}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
                     aria-label="toggle password visibility"
                     onClick={changeType}
-                    onMouseDown={handleMouseDownPassword}
                     edge="end"
                   >
                     {typePass === 'text' ? <Visibility /> : <VisibilityOff />}
@@ -190,7 +186,7 @@ const FormSignUp = () => {
               labelWidth={70}
             />
           </FormControl>
-           <FormButton type="submit" variant="contained" color="primary" >Criar</FormButton>
+           <FormButton data-testid="btn-signup" type="submit" variant="contained" color="primary" >Criar</FormButton>
         </Form>
       </div>
   )
