@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { HeaderContainer, BarTitle, BarTitleContainer, BackIcon } from "./style";
+import {
+  HeaderContainer,
+  BarTitle,
+  BarTitleContainer,
+  BackIcon,
+} from "./style";
 
 const Header = () => {
   const history = useHistory();
@@ -22,7 +27,7 @@ const Header = () => {
         setCurrentPage("Restaurante");
         setHasBackButton(true);
         break;
-      case ("/profile/updateProfile"):
+      case "/profile/updateProfile":
         setCurrentPage("Editar");
         setHasBackButton(true);
         break;
@@ -43,18 +48,18 @@ const Header = () => {
         setCurrentPage(" ");
         break;
       default:
-        if(history.location.pathname.includes('/restaurant')){
-          setCurrentPage('Restaurante')
+        if (history.location.pathname.includes("/restaurant")) {
+          setCurrentPage("Restaurante");
           setHasBackButton(true);
           break;
         }
-        setCurrentPage('Sem registro')
+        setCurrentPage("Sem registro");
     }
-  });
+  }, [history.location.pathname]);
 
   return (
     <HeaderContainer>
-      {hasBackButton ? <BackIcon onClick={() => history.goBack()}/> : <></>}
+      {hasBackButton ? <BackIcon onClick={() => history.goBack()} /> : <></>}
       <BarTitleContainer>
         <BarTitle>{currentPage}</BarTitle>
       </BarTitleContainer>

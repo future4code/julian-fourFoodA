@@ -1,16 +1,18 @@
+
 import React from "react";
 import { useHistory } from 'react-router';
 import ActiveOrder from '../ActiveOrder';
 import { FooterContainer, CardFooterContainer, CartStlIcon, HomeStlIcon, ProfileStlIcon, BarButton } from "./style";
 
-const Footer = () => {
 
+const Footer = () => {
   const history = useHistory();
 
   const currentPage = history.location.pathname;
 
   return (
     <FooterContainer>
+
       <ActiveOrder />
       <CardFooterContainer>
         <BarButton 
