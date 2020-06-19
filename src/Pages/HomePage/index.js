@@ -103,14 +103,14 @@ const HomePage = () => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <TabUncap value="Hamburguer" label="Hamburguer" {...a11yProps(0)} />
-          <TabUncap value='Asiática' label="Asiática" {...a11yProps(1)} />
-          <TabUncap value='Italiana' label="Italiana" {...a11yProps(2)} />
-          <TabUncap value='Sorvetes' label="Sorvetes" {...a11yProps(3)} />
-          <TabUncap value='Carnes' label="Carnes" {...a11yProps(4)} />
-          <TabUncap value='Baiana' label="Baiana" {...a11yProps(5)} />
-          <TabUncap value='Petiscos' label="Petiscos" {...a11yProps(6)} />
-          <TabUncap value='Mexicana' label="Mexicana" {...a11yProps(7)} />
+          <TabUncap data-testid="Hamburguer" value="Hamburguer" label="Hamburguer" {...a11yProps(0)} />
+          <TabUncap data-testid="Asiática" value='Asiática' label="Asiática" {...a11yProps(1)} />
+          <TabUncap data-testid="Italiana" value='Italiana' label="Italiana" {...a11yProps(2)} />
+          <TabUncap data-testid="Sorvetes" value='Sorvetes' label="Sorvetes" {...a11yProps(3)} />
+          <TabUncap data-testid="Carnes" value='Carnes' label="Carnes" {...a11yProps(4)} />
+          <TabUncap data-testid="Baiana" value='Baiana' label="Baiana" {...a11yProps(5)} />
+          <TabUncap data-testid="Petiscos" value='Petiscos' label="Petiscos" {...a11yProps(6)} />
+          <TabUncap data-testid="Mexicana" value='Mexicana' label="Mexicana" {...a11yProps(7)} />
         </Tabs>
       </AppBarClean>
       {restaurantList ? (
