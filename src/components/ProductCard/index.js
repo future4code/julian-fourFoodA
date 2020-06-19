@@ -10,7 +10,7 @@ import {
 
 const ProductCard = (props) => {
 
-  const { id, name, description, photoUrl, quantity, price } = props.product;
+  const { name, description, photoUrl, quantity, price } = props.product;
 
   const history = useHistory();
 

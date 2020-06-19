@@ -8,7 +8,7 @@ import {
 
 const ShowProfile = (props) => {
 
-  const { id, name, email, cpf } = props.profile;
+  const { name, email, cpf } = props.profile;
 
   const history = useHistory();
 
