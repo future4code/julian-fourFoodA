@@ -102,14 +102,16 @@ const HomePage = () => {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <TabUncap key={0} value="Hamburguer" label="Hamburguer" {...a11yProps(0)} />
-          <TabUncap key={1} value='Asiática' label="Asiática" {...a11yProps(1)} />
-          <TabUncap key={2} value='Sorvetes' label="Sorvetes" {...a11yProps(3)} />
-          <TabUncap key={3} value='Carnes' label="Carnes" {...a11yProps(4)} />
-          <TabUncap key={4} value='Baiana' label="Baiana" {...a11yProps(5)} />
-          <TabUncap key={5} value='Italiana' label="Italiana" {...a11yProps(2)} />
-          <TabUncap key={6} value='Petiscos' label="Petiscos" {...a11yProps(6)} />
-          <TabUncap key={7} value='Mexicana' label="Mexicana" {...a11yProps(7)} />
+
+          <TabUncap key={0} data-testid="Hamburguer" value="Hamburguer" label="Hamburguer" {...a11yProps(0)} />
+          <TabUncap key={1} data-testid="Asiática" value='Asiática' label="Asiática" {...a11yProps(1)} />
+          <TabUncap key={2} data-testid="Italiana" value='Italiana' label="Italiana" {...a11yProps(2)} />
+          <TabUncap key={3} data-testid="Sorvetes" value='Sorvetes' label="Sorvetes" {...a11yProps(3)} />
+          <TabUncap key={4} data-testid="Carnes" value='Carnes' label="Carnes" {...a11yProps(4)} />
+          <TabUncap key={5} data-testid="Baiana" value='Baiana' label="Baiana" {...a11yProps(5)} />
+          <TabUncap key={6} data-testid="Petiscos" value='Petiscos' label="Petiscos" {...a11yProps(6)} />
+          <TabUncap key={7} data-testid="Mexicana" value='Mexicana' label="Mexicana" {...a11yProps(7)} />
+
         </Tabs>
       </AppBarClean>
       {restaurantList ? (
