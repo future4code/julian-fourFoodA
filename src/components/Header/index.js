@@ -58,10 +58,11 @@ const Header = () => {
   }, [history.location.pathname]);
 
   return (
-    <HeaderContainer>
-      {hasBackButton ? <BackIcon onClick={() => history.goBack()} /> : <></>}
+
+    <HeaderContainer data-testid="HeaderContainer">
+      {hasBackButton ? <BackIcon onClick={() => history.goBack()}/> : <></>}
       <BarTitleContainer>
-        <BarTitle>{currentPage}</BarTitle>
+        <BarTitle data-testid="HeaderText">{currentPage}</BarTitle>
       </BarTitleContainer>
     </HeaderContainer>
   );

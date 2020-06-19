@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card } from "@material-ui/core";
+import { Card, Button } from "@material-ui/core";
 
 export const ProductCardContainer = styled(Card)`
   && {
@@ -61,14 +61,15 @@ export const Qty = styled.span`
   justify-content: center;
   align-items: center;
 `;
-export const AddButton = styled.span`
+export const AddButton = styled.button`
   cursor: pointer;
-  grid-row: 3 / span 1;
-  grid-column: 2 / span 2;
+  /* grid-row: 3 / span 1;
+  grid-column: 2 / span 2; */
   border: 1px solid black;
   border-radius: 8px 0 8px 0;
   font-family: Roboto;
   display: flex;
+  background-color: white;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -78,8 +79,14 @@ export const AddButton = styled.span`
   padding: 0;
   height: 31px;
   width: 90px;
+  gap: 0;
+  outline: none;
+  color: black;
+  background-color: white;
+  text-transform: none;
 `;
-export const RemoveButton = styled.span`
+
+export const RemoveButton = styled.button`
   cursor: pointer;
   grid-row: 3 / span 1;
   grid-column: 2 / span 2;
@@ -87,6 +94,16 @@ export const RemoveButton = styled.span`
   color: #e8222e;
   border-radius: 0.5em 0 0.5em 0;
   display: flex;
+  background-color: white;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  height: 31px;
+  width: 90px;
+  gap: 0;
+  outline: none;
 `;

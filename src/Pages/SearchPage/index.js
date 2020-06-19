@@ -30,7 +30,7 @@ const SearchPage = () => {
 
   const getRestaurants = () => {
     axios
-      .get(`${baseUrl}/restaurants`, {
+      .get(`https://us-central1-missao-newton.cloudfunctions.net/fourFoodA/restaurants`, {
         headers: {
           auth: token,
         },
@@ -65,7 +65,7 @@ const SearchPage = () => {
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <SearchIcon />
+                <SearchIcon data-testid="Search"/>
               </InputAdornment>
             ),
           }}
