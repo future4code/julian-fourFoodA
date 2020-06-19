@@ -19,7 +19,7 @@ import useForm from '../../hooks/useForm';
 const baseUrl = 'https://us-central1-missao-newton.cloudfunctions.net/fourFoodA';
 
 const UpdateProfilePage = () => {
-  // usePrivatePage();
+  usePrivatePage();
 
   const history = useHistory();
 

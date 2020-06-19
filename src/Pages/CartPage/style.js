@@ -7,6 +7,7 @@ export const FormContainer = styled.form`
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: 65px;
 `
 export const AddressContainer = styled.div`
   background-color: #eee;
