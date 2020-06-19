@@ -13,7 +13,7 @@ const RestaurantCard = (props) => {
         history.push(`/restaurant/${restaurantId}`);
     }
     return(
-        <RestCard data-key={props.restaurant.id} onClick={goToRestaurantPage}>
+        <RestCard role='restCard' data-key={props.restaurant.id} onClick={goToRestaurantPage}>
         <CardMedia component='img' src={props.restaurant.logoUrl} height='120'/>
         <NomeRest>{props.restaurant.name}</NomeRest>
         <RestInfo>

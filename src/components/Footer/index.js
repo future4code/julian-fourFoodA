@@ -15,21 +15,21 @@ const Footer = () => {
         size='large'
         color={(currentPage === '/home') ? 'primary' : 'default'}
       >
-        <HomeStlIcon/>
+        <HomeStlIcon data-testid="Home"/>
       </BarButton>
       <BarButton 
         onClick={() => history.push('/cart')} 
         size='large'
         color={(currentPage === '/cart') ? 'primary' : 'default'}
       >
-        <CartStlIcon/>
+        <CartStlIcon data-testid="Cart"/>
       </BarButton>
       <BarButton 
         onClick={() => history.push('/profile')} 
         size='large'
         color={(currentPage === '/profile') ? 'primary' : 'default'}
       >
-        <ProfileStlIcon/>
+        <ProfileStlIcon data-testid="Profile"/>
       </BarButton>
     </FooterContainer>
   );
